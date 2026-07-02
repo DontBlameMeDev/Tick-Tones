@@ -5,114 +5,133 @@
 [![Latest Version](https://img.shields.io/github/v/release/DontBlameMe99/Tick-Tones?include_prereleases&display_name=tag&style=for-the-badge&label=Version&labelColor=%231e1e2e&color=%23cba6f7)](https://github.com/DontBlameMe99/Tick-Tones/releases)
 [![License](https://img.shields.io/github/license/DontBlameMe99/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%23f38ba8)](LICENSE)
 
-> Bring your checklists to life! Tick Tones plays a satisfying sound whenever you check or uncheck a checkbox in [Obsidian](https://obsidian.md/). Supports custom sounds, volume control, and a variety of audio formats.
+Bring your checklists to life. Tick Tones plays a sound whenever you check or
+uncheck a checkbox in [Obsidian](https://obsidian.md/). It supports custom
+sounds, volume control, and a variety of audio formats.
 
----
+## Table of Contents
+
+<!--toc:start-->
+
+- [Tick Tones for Obsidian](#tick-tones-for-obsidian)
+  - [Demo](#demo)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [From Obsidian](#from-obsidian)
+    - [From GitHub](#from-github)
+    - [Quick Start](#quick-start)
+  - [Adding Sounds](#adding-sounds)
+    - [Built-in Sample Sounds](#built-in-sample-sounds)
+    - [Your Own Sounds](#your-own-sounds)
+    - [Why Manual Installation?](#why-manual-installation)
+  - [Configuration](#configuration)
+  - [Troubleshooting](#troubleshooting)
+    - [Sounds Do Not Play](#sounds-do-not-play)
+    - [Where Is My Vault Folder?](#where-is-my-vault-folder)
+
+<!--toc:end-->
 
 ## Features
 
 - Plays a sound when you check or uncheck a checkbox
-- Easily add and switch between multiple custom sounds
-- Volume slider for fine-tuned sound control
-- Supports `.wav`, `.mp3`, `.ogg`, `.flac`, `.aac`, `.m4a`, `.opus`, and `.webm` files
-- Curated sound assets and easy user sound installation
-
----
+- Switch between multiple custom sounds with ease
+- Volume slider for fine-tuned control
+- Supports `.wav`, `.mp3`, `.ogg`, `.flac`, `.aac`, `.m4a`, `.opus`, and `.webm`
+  files
+- Built-in sample sound downloader
+- Random sound mode for variety
 
 ## Installation
 
-### Quick Start
+**Minimum Obsidian version:** 1.13.0
 
-1. Install the plugin in Obsidian.
-2. Add your desired sounds (see [Installing Sounds](#installing-sounds)).
-3. Reload the plugin.
-4. Configure the plugin's settings to your liking.
-5. Enjoy!
-
-### Installing the Plugin
-
-#### From Obsidian
+### From Obsidian
 
 1. Open **Settings** in Obsidian (`Ctrl+,` by default).
 2. Go to the **Community plugins** tab.
-3. Enable community plugins, if not already enabled.
+3. Enable community plugins (if not already enabled).
 4. Search for **Tick Tones**.
-5. Click **Install**.
-6. Click **Enable** after installation.
+5. Click **Install**, then **Enable**.
 
-#### From GitHub
+### From GitHub
 
-1. Download the [latest release](https://github.com/DontBlameMe99/Tick-Tones/releases/latest).
+1. Download the
+   [latest release](https://github.com/DontBlameMe99/Tick-Tones/releases/latest).
 2. Extract the zip file.
-3. Move the extracted folder to your vault's plugin directory at `.obsidian/plugins/`.
-4. Open **Settings** in Obsidian.
-5. Enable **Tick Tones** in the **Community plugins** tab.
+3. Move the extracted folder to your vault's plugin directory at
+   `.obsidian/plugins/`.
+4. Open **Settings**, go to the **Community plugins** tab, and enable **Tick
+   Tones**.
 
----
+### Quick Start
 
-## Installing Sounds
+1. Open **Tick Tones** settings from the **Community plugins** tab.
+2. Click **Download Sample Sounds** to get started with curated sounds, or add
+   your own (see [Adding Sounds](#adding-sounds)).
+3. Adjust the tick and untick sounds and volumes to your liking.
+4. Check or uncheck a checkbox in any note to hear the result.
 
-You can use curated sounds or add your own! Here’s how:
+> \[\!TIP\] The settings tab has a **Reload Sounds** button. Use it after adding
+> new sound files instead of disabling and re-enabling the plugin.
 
-- Download sounds from the [assets folder](https://github.com/DontBlameMe99/Tick-Tones/tree/master/assets) (curated by us).
-- Or, find and download your own sounds from sites such as [Pixabay](https://pixabay.com/sound-effects/search/click/) or [YouTube](https://youtube.com).
+## Adding Sounds
 
-**Supported formats:** `.wav`, `.mp3`, `.ogg`, `.flac`, `.aac`, `.m4a`, `.opus`, `.webm`
+### Built-in Sample Sounds
 
-### Adding Sounds
+Open the plugin's settings and click **Download Sample Sounds**. The plugin will
+download a curated set of sounds directly into your assets folder.
+
+### Your Own Sounds
 
 1. Place your audio files in the plugin's assets directory:
-   ```
-   .obsidian/plugins/tick-tones/assets
-   ```
-   _Note: You may need to create the `assets` folder if it doesn't exist._
-2. The `.obsidian` directory is hidden by default. You can find it in your vault’s root folder.
 
-### Why do I need to manually install sounds?
+       YourVault/.obsidian/plugins/tick-tones/assets/
 
-Obsidian plugins cannot bundle large audio files directly. This keeps the plugin lightweight and lets you choose only the sounds you want.
+   You may need to create the `assets` folder if it does not exist. The
+   `.obsidian` folder is hidden by default — enable hidden file viewing in your
+   file browser.
 
----
+   > \[\!NOTE\] `YourVault` is your Obsidian vault root folder, not the Obsidian
+   > application folder.
 
-## Reloading the Plugin
+2. Find sounds on sites like
+   [Pixabay](https://pixabay.com/sound-effects/search/click/) or
+   [YouTube](https://youtube.com).
 
-After adding new sounds, reload the plugin:
+3. After adding files, click **Reload Sounds** in the plugin settings.
 
-1. Open **Settings** in Obsidian.
-2. Go to the **Community plugins** tab.
-3. Disable **Tick Tones**.
-4. Enable **Tick Tones** again.
+**Supported formats:** `.wav`, `.mp3`, `.ogg`, `.flac`, `.aac`, `.m4a`, `.opus`,
+`.webm`
 
----
+### Why Manual Installation?
+
+Obsidian plugins cannot bundle large audio files directly. This keeps the plugin
+lightweight and lets you choose only the sounds you want.
 
 ## Configuration
 
 1. Open **Settings** in Obsidian.
 2. Go to the **Community plugins** tab.
-3. Find **Tick Tones** and click the **Settings** icon.
-4. Configure sound, volume, and other options as desired.
-
----
+3. Find **Tick Tones** and click the gear icon.
+4. Configure the following options:
+   - **Tick Sound** — the sound played when you check a box
+   - **Untick Sound** — the sound played when you uncheck a box
+   - **Volume** — separate sliders for tick and untick sounds
+   - **Random Sounds** — enable to play a random sound from a curated list each
+     time
 
 ## Troubleshooting
 
-### Sounds not playing?
+### Sounds Do Not Play
 
-- Ensure the sound files are in `.obsidian/plugins/tick-tones/assets`
-- Confirm the file format is supported
-- Reload the plugin after adding new sounds (see above)
-- Make sure your system’s audio is not muted
-- Try to restart Obsidian
+- Ensure audio files are in `.obsidian/plugins/tick-tones/assets/`.
+- Confirm the file format is supported (see [Adding Sounds](#adding-sounds)).
+- Click **Reload Sounds** in the plugin settings after adding new files.
+- Make sure your system audio is not muted.
+- Try restarting Obsidian.
 
-### Where do I find my vault folder?
+### Where Is My Vault Folder?
 
-- [Obsidian Help: Folder Structure](https://help.obsidian.md/Advanced+topics/How+Obsidian+stores+data)
-
----
-
-## Contributing
-
-Contributions are welcome!
-Feel free to open [issues](https://github.com/DontBlameMe99/Tick-Tones/issues) or [pull requests](https://github.com/DontBlameMe99/Tick-Tones/pulls), but be sure to take a look at our [code of conduct](CODE_OF_CONDUCT.md) and [contributing](CONTRIBUTING.md) files.
-
----
+See the
+[Obsidian documentation on folder structure](https://help.obsidian.md/Advanced+topics/How+Obsidian+stores+data).

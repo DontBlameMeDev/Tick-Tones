@@ -4,8 +4,8 @@ import { SoundLoader } from './soundLoader'
 import type { TickTonesSettings } from './types'
 
 export class SoundManager {
+  soundCache: Record<string, Howl> = {}
   private loadedSounds: Record<string, string> = {}
-  private soundCache: Record<string, Howl> = {}
   private soundLoader: SoundLoader
   private settings: TickTonesSettings
 
@@ -18,7 +18,7 @@ export class SoundManager {
     this.loadedSounds = await this.soundLoader.loadSounds()
   }
 
-  private async playSound(sound: string, volume: number): Promise<void> {
+  async playSound(sound: string, volume: number): Promise<void> {
     if (Object.keys(this.loadedSounds).length === 0) {
       console.warn('No sounds found.  Aborting.')
       return
@@ -43,7 +43,7 @@ export class SoundManager {
     howl.play()
   }
 
-  private getRandomSound(sounds: string[]): string | null {
+  getRandomSound(sounds: string[]): string | null {
     if (sounds.length === 0) {
       new Notice(
         'No random sound available, please check your settings and select sound(s).',

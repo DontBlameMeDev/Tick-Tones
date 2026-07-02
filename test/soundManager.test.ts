@@ -82,19 +82,19 @@ describe('SoundManager', () => {
       mockLoadSounds.mockResolvedValue({})
       await emptySoundManager.init()
 
-      await emptySoundManager['playSound']('lorem', 0.5)
+      await emptySoundManager.playSound('lorem', 0.5)
 
       expect(consoleWarnSpy).toHaveBeenCalledWith('No sounds found.  Aborting.')
     })
 
     it('logs error if sound not found', async () => {
-      await soundManager['playSound']('nonexistent', 0.5)
+      await soundManager.playSound('nonexistent', 0.5)
 
       expect(consoleErrorSpy).toHaveBeenCalledWith('Sound "nonexistent" not found.')
     })
 
     it('creates a new Howl instance if not cached', async () => {
-      await soundManager['playSound']('lorem', 0.5)
+      await soundManager.playSound('lorem', 0.5)
 
       expect(HowlMock).toHaveBeenCalledWith({
         src: ['data:audio/mp3;base64,lorem'],
@@ -105,9 +105,9 @@ describe('SoundManager', () => {
     })
 
     it('reuses cached Howl instance', async () => {
-      await soundManager['playSound']('lorem', 0.5)
+      await soundManager.playSound('lorem', 0.5)
 
-      await soundManager['playSound']('lorem', 0.7)
+      await soundManager.playSound('lorem', 0.7)
       expect(HowlMock).toHaveBeenCalledTimes(1)
       expect(mockHowlInstance.volume).toHaveBeenCalledWith(0.7)
       expect(mockHowlInstance.play).toHaveBeenCalledTimes(2)
@@ -288,32 +288,32 @@ describe('SoundManager', () => {
       })
       await soundManager.init()
 
-      await soundManager['playSound']('lorem', 0.5)
-      await soundManager['playSound']('ipsum', 0.5)
+      await soundManager.playSound('lorem', 0.5)
+      await soundManager.playSound('ipsum', 0.5)
 
       soundManager.unload()
 
       expect(mockHowlInstance.unload).toHaveBeenCalledTimes(2)
-      expect(soundManager['soundCache']).toEqual({})
+      expect(soundManager.soundCache).toEqual({})
     })
   })
 
   describe('getRandomSound', () => {
     it('returns null for empty array', () => {
-      const result = soundManager['getRandomSound']([])
+      const result = soundManager.getRandomSound([])
       expect(result).toBeNull()
       expect(consoleWarnSpy).toHaveBeenCalledWith('No random sound available, playing nothing.')
     })
 
     it('returns the only sound in a single-element array', () => {
-      const result = soundManager['getRandomSound'](['single'])
+      const result = soundManager.getRandomSound(['single'])
       expect(result).toBe('single')
       expect(consoleWarnSpy).not.toHaveBeenCalled()
     })
 
     it('returns a sound from the array', () => {
       const sounds = ['lorem', 'ipsum', 'dolor']
-      const result = soundManager['getRandomSound'](sounds)
+      const result = soundManager.getRandomSound(sounds)
       expect(result).not.toBeNull()
       expect(sounds).toContain(result as string)
       expect(consoleWarnSpy).not.toHaveBeenCalled()
@@ -324,7 +324,7 @@ describe('SoundManager', () => {
       const results = new Set<string>()
 
       for (let i = 0; i < 50; i++) {
-        const result = soundManager['getRandomSound'](sounds)
+        const result = soundManager.getRandomSound(sounds)
         if (result) results.add(result)
       }
 

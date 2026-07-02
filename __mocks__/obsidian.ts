@@ -4,6 +4,9 @@ export const Notice = jest.fn()
 export const FileSystemAdapter = jest.fn()
 export const normalizePath = jest.fn((p: string) => p.replace(/\/+/g, '/'))
 export const settingInstances: any[] = []
+export const requestUrl = jest
+  .fn()
+  .mockResolvedValue({ status: 200, arrayBuffer: new ArrayBuffer(0) })
 
 export class PluginSettingTab {
   app: any

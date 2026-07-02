@@ -1,14 +1,13 @@
-import { mkdirSync } from 'fs'
 import {
   type App,
   FileSystemAdapter,
   Notice,
   normalizePath,
   PluginSettingTab,
+  requestUrl,
   type Setting,
   type SettingDefinitionItem,
 } from 'obsidian'
-import { join } from 'path'
 import type TickTonesSounds from '../main'
 import type { SoundManager } from './soundManager'
 import type { TickTonesSettings } from './types'
@@ -48,10 +47,11 @@ export class TickTonesSettingsTab extends PluginSettingTab {
   private openSoundsFolder(): void {
     const adapter = this.plugin.app.vault.adapter
     if (adapter instanceof FileSystemAdapter) {
-      const assetsPath = join(adapter.getBasePath(), this.plugin.manifest.dir!, 'assets')
-      mkdirSync(assetsPath, { recursive: true })
-      const { shell } = require('electron')
-      shell.openPath(assetsPath)
+      const assetsPath = normalizePath(
+        `${adapter.getBasePath()}/${this.plugin.manifest.dir}/assets`
+      )
+      this.plugin.app.vault.adapter.mkdir(assetsPath).catch(() => {})
+      require('electron').shell.openPath(assetsPath)
     }
   }
 
@@ -67,9 +67,9 @@ export class TickTonesSettingsTab extends PluginSettingTab {
 
     const results = await Promise.allSettled(
       SAMPLE_SOUNDS.map(async (sound) => {
-        const response = await fetch(sound.url)
-        if (!response.ok) throw new Error(`HTTP ${response.status}`)
-        const buffer = await response.arrayBuffer()
+        const response = await requestUrl(sound.url)
+        if (response.status !== 200) throw new Error(`HTTP ${response.status}`)
+        const buffer = response.arrayBuffer
         const filePath = normalizePath(`${assetsPath}/${sound.name}`)
         await adapter.writeBinary(filePath, buffer)
       })

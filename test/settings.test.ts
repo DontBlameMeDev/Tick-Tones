@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, jest } from 'bun:test'
 import type { App } from 'obsidian'
-import { Notice } from 'obsidian'
+import { Notice, requestUrl } from 'obsidian'
 import type TickTones from '../main'
 import { TickTonesSettingsTab } from '../src/settings'
 import type { SoundManager } from '../src/soundManager'
@@ -347,27 +347,27 @@ describe('TickTonesSettingsTab', () => {
       ;(app as any).vault = { adapter: mockAdapter }
       ;(plugin as any).manifest = { dir: '.obsidian/plugins/tick-tones' }
       ;(plugin as any).app = app
-      globalThis.fetch = jest.fn().mockResolvedValue({
-        ok: true,
-        arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(8)),
-      }) as any
+      ;(requestUrl as any).mockResolvedValue({
+        status: 200,
+        arrayBuffer: new ArrayBuffer(8),
+      })
     })
 
     afterEach(() => {
+      jest.clearAllMocks()
       ;(app as any).vault = undefined
       ;(plugin as any).manifest = undefined
       ;(plugin as any).app = undefined
-      ;(globalThis as any).fetch = undefined
     })
 
     it('downloads sample sounds successfully', async () => {
       await (tab as any).downloadSampleSounds()
 
-      expect(globalThis.fetch).toHaveBeenCalledTimes(2)
-      expect(globalThis.fetch).toHaveBeenCalledWith(
+      expect(requestUrl).toHaveBeenCalledTimes(2)
+      expect(requestUrl).toHaveBeenCalledWith(
         'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Microsoft_ToDo.wav'
       )
-      expect(globalThis.fetch).toHaveBeenCalledWith(
+      expect(requestUrl).toHaveBeenCalledWith(
         'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Task_Completed.wav'
       )
       expect(mockAdapter.mkdir).toHaveBeenCalledWith('.obsidian/plugins/tick-tones/assets')
@@ -376,7 +376,7 @@ describe('TickTonesSettingsTab', () => {
     })
 
     it('handles network failure gracefully', async () => {
-      globalThis.fetch = jest.fn().mockRejectedValue(new Error('Network error')) as any
+      ;(requestUrl as any).mockRejectedValue(new Error('Network error'))
 
       await (tab as any).downloadSampleSounds()
 
@@ -386,11 +386,10 @@ describe('TickTonesSettingsTab', () => {
     })
 
     it('handles HTTP error status gracefully', async () => {
-      globalThis.fetch = jest.fn().mockResolvedValue({
-        ok: false,
+      ;(requestUrl as any).mockResolvedValue({
         status: 404,
-        arrayBuffer: jest.fn(),
-      }) as any
+        arrayBuffer: new ArrayBuffer(0),
+      })
 
       await (tab as any).downloadSampleSounds()
 
@@ -400,17 +399,15 @@ describe('TickTonesSettingsTab', () => {
     })
 
     it('handles partial download failure gracefully', async () => {
-      globalThis.fetch = jest
-        .fn()
+      ;(requestUrl as any)
         .mockResolvedValueOnce({
-          ok: true,
-          arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(8)),
+          status: 200,
+          arrayBuffer: new ArrayBuffer(8),
         })
         .mockResolvedValueOnce({
-          ok: false,
           status: 500,
-          arrayBuffer: jest.fn(),
-        }) as any
+          arrayBuffer: new ArrayBuffer(0),
+        })
 
       await (tab as any).downloadSampleSounds()
 
@@ -468,10 +465,10 @@ describe('TickTonesSettingsTab', () => {
       ;(app as any).vault = { adapter: mockAdapter }
       ;(plugin as any).manifest = { dir: '.obsidian/plugins/tick-tones' }
       ;(plugin as any).app = app
-      globalThis.fetch = jest.fn().mockResolvedValue({
-        ok: true,
-        arrayBuffer: jest.fn().mockResolvedValue(new ArrayBuffer(8)),
-      }) as any
+      ;(requestUrl as any).mockResolvedValue({
+        status: 200,
+        arrayBuffer: new ArrayBuffer(8),
+      })
 
       const definitions = tab.getSettingDefinitions()
       const welcomeGroup = getGroup(definitions, 'Get started')
@@ -496,14 +493,13 @@ describe('TickTonesSettingsTab', () => {
       downloadItem.render!(mockSetting, {} as any)
       await mockButton.click()
 
-      expect(globalThis.fetch).toHaveBeenCalled()
+      expect(requestUrl).toHaveBeenCalled()
       expect(soundManager.reloadSounds).toHaveBeenCalled()
       expect(tab.update as jest.Mock).toHaveBeenCalled()
 
       ;(app as any).vault = undefined
       ;(plugin as any).manifest = undefined
       ;(plugin as any).app = undefined
-      ;(globalThis as any).fetch = undefined
     })
   })
 

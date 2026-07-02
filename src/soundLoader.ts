@@ -75,7 +75,6 @@ function getMimeType(ext: string): string {
       return 'audio/opus'
     case '.webm':
       return 'audio/webm'
-    case '.wav':
     default:
       return 'audio/wav'
   }

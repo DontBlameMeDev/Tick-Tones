@@ -22,15 +22,15 @@ export default class TickTones extends Plugin {
       handleCheckboxMutation(
         mutations,
         () => {
-          this.soundManager.playTickSound()
+          void this.soundManager.playTickSound()
         },
         () => {
-          this.soundManager.playUntickSound()
+          void this.soundManager.playUntickSound()
         }
       )
     })
 
-    observer.observe(document.body, {
+    observer.observe(activeDocument.body, {
       subtree: true,
       attributes: true,
       attributeFilter: ['data-task'],

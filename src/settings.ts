@@ -179,7 +179,7 @@ export class TickTonesSettingsTab extends PluginSettingTab {
                   this.plugin.saveSettings()
                   updateDesc()
                 },
-                (sound, isSelected) => `tick-sound-btn${isSelected ? ' mod-cta' : ''}`
+                (_sound, isSelected) => `tick-sound-btn${isSelected ? ' mod-cta' : ''}`
               )
             },
           },

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
@@ -11,14 +11,15 @@
     },
     "types": ["bun-types", "node"],
     "allowJs": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "isolatedModules": true,
     "esModuleInterop": true,
     "importHelpers": true,
     "sourceMap": true,
     "inlineSources": true,
-    "lib": ["DOM", "ES2017"],
+    "lib": ["DOM", "ES2022"],
     "skipLibCheck": true
   },
   "include": ["main.ts", "src/**/*.ts", "test/**/*.ts"]

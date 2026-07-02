@@ -87,6 +87,37 @@ describe('SoundLoader', () => {
     expect(sounds.keep).toMatch(/^data:audio\/mpeg;base64,/)
   })
 
+  it('encodes bytes in the 128-255 range correctly', async () => {
+    adapter.exists.mockResolvedValue(true)
+    adapter.list.mockResolvedValue({
+      files: ['/plugins/my-plugin/assets/high.wav'],
+    })
+    // Bytes 128-255 in sequence — the range where TextDecoder('latin1') differs
+    const highBytes = Array.from({ length: 128 }, (_, i) => i + 128)
+    adapter.readBinary.mockResolvedValue(highBytes)
+
+    const loader = new SoundLoader(app, '/plugins/my-plugin')
+    const sounds = await loader.loadSounds()
+
+    const uri = sounds.high
+    expect(uri).toBeDefined()
+    const base64 = uri!.split(',')[1]
+    const decoded = Buffer.from(base64, 'base64')
+    expect(Array.from(decoded)).toEqual(highBytes)
+  })
+
+  it('handles all 256 byte values without throwing', async () => {
+    adapter.exists.mockResolvedValue(true)
+    adapter.list.mockResolvedValue({
+      files: ['/plugins/my-plugin/assets/full.wav'],
+    })
+    const allBytes = Array.from({ length: 256 }, (_, i) => i)
+    adapter.readBinary.mockResolvedValue(allBytes)
+
+    const loader = new SoundLoader(app, '/plugins/my-plugin')
+    await expect(loader.loadSounds()).resolves.toHaveProperty('full')
+  })
+
   it('handles errors gracefully and returns empty object', async () => {
     // Turn off console.error
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})

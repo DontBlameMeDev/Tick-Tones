@@ -13,8 +13,7 @@ sounds, volume control, and a variety of audio formats.
 
 <!--toc:start-->
 
-- [Tick Tones for Obsidian](#tick-tones-for-obsidian)
-  - [Demo](#demo)
+- [Checkbox Tick Tones for Obsidian](#checkbox-tick-tones-for-obsidian)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)

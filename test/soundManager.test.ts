@@ -305,12 +305,6 @@ describe('SoundManager', () => {
       expect(consoleWarnSpy).toHaveBeenCalledWith('No random sound available, playing nothing.')
     })
 
-    it('returns null for null input', () => {
-      const result = soundManager['getRandomSound'](null as any)
-      expect(result).toBeNull()
-      expect(consoleWarnSpy).toHaveBeenCalledWith('No random sound available, playing nothing.')
-    })
-
     it('returns the only sound in a single-element array', () => {
       const result = soundManager['getRandomSound'](['single'])
       expect(result).toBe('single')

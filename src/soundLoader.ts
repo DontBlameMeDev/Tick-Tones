@@ -1,4 +1,4 @@
-import { App, Vault, normalizePath } from 'obsidian'
+import { type App, normalizePath, type Vault } from 'obsidian'
 
 export class SoundLoader {
   private vault: Vault

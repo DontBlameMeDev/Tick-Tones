@@ -50,7 +50,6 @@ export class TickTonesSettingsTab extends PluginSettingTab {
     if (adapter instanceof FileSystemAdapter) {
       const assetsPath = join(adapter.getBasePath(), this.plugin.manifest.dir!, 'assets')
       mkdirSync(assetsPath, { recursive: true })
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { shell } = require('electron')
       shell.openPath(assetsPath)
     }
@@ -66,19 +65,22 @@ export class TickTonesSettingsTab extends PluginSettingTab {
       // folder already exists
     }
 
-    let downloaded = 0
-    for (const sound of SAMPLE_SOUNDS) {
-      try {
+    const results = await Promise.allSettled(
+      SAMPLE_SOUNDS.map(async (sound) => {
         const response = await fetch(sound.url)
         if (!response.ok) throw new Error(`HTTP ${response.status}`)
         const buffer = await response.arrayBuffer()
         const filePath = normalizePath(`${assetsPath}/${sound.name}`)
         await adapter.writeBinary(filePath, buffer)
-        downloaded++
-      } catch (err) {
-        console.error(`Failed to download sample sound: ${sound.name}`, err)
-        new Notice(`Failed to download ${sound.name}`)
-        return
+      })
+    )
+
+    const downloaded = results.filter((r) => r.status === 'fulfilled').length
+    for (let i = 0; i < results.length; i++) {
+      const result = results[i]
+      if (result.status === 'rejected') {
+        console.error(`Failed to download sample sound: ${SAMPLE_SOUNDS[i].name}`, result.reason)
+        new Notice(`Failed to download ${SAMPLE_SOUNDS[i].name}`)
       }
     }
 
@@ -215,11 +217,6 @@ export class TickTonesSettingsTab extends PluginSettingTab {
               setting.addButton((button) => {
                 button.setIcon('play').setTooltip('Play tick sound')
                 button.onClick(() => {
-                  const selectedSound = this.plugin.settings.tickSound
-                  if (!selectedSound) {
-                    console.warn('No sound selected, cannot play sound.')
-                    return
-                  }
                   this.soundManager.playTickSound().catch((err) => {
                     console.error('Failed to play tick sound.', err)
                   })
@@ -315,11 +312,6 @@ export class TickTonesSettingsTab extends PluginSettingTab {
               setting.addButton((button) => {
                 button.setIcon('play').setTooltip('Play untick sound')
                 button.onClick(() => {
-                  const selectedSound = this.plugin.settings.untickSound
-                  if (!selectedSound) {
-                    console.warn('No sound selected, cannot play sound.')
-                    return
-                  }
                   this.soundManager.playUntickSound().catch((err) => {
                     console.error('Failed to play untick sound.', err)
                   })
@@ -391,10 +383,7 @@ export class TickTonesSettingsTab extends PluginSettingTab {
   }
 
   private buildSoundOptions(sounds: string[]): Record<string, string> {
-    return sounds.reduce<Record<string, string>>((options, sound) => {
-      options[sound] = sound
-      return options
-    }, {})
+    return Object.fromEntries(sounds.map((s) => [s, s]))
   }
 
   private renderSoundList(

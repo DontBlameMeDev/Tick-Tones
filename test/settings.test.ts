@@ -380,6 +380,7 @@ describe('TickTonesSettingsTab', () => {
       await (tab as any).downloadSampleSounds()
 
       expect(Notice).toHaveBeenCalledWith('Failed to download Microsoft_ToDo.wav')
+      expect(Notice).toHaveBeenCalledWith('Failed to download Task_Completed.wav')
       expect(mockAdapter.writeBinary).not.toHaveBeenCalled()
     })
 
@@ -393,6 +394,7 @@ describe('TickTonesSettingsTab', () => {
       await (tab as any).downloadSampleSounds()
 
       expect(Notice).toHaveBeenCalledWith('Failed to download Microsoft_ToDo.wav')
+      expect(Notice).toHaveBeenCalledWith('Failed to download Task_Completed.wav')
       expect(mockAdapter.writeBinary).not.toHaveBeenCalled()
     })
 
@@ -413,6 +415,7 @@ describe('TickTonesSettingsTab', () => {
 
       expect(mockAdapter.writeBinary).toHaveBeenCalledTimes(1)
       expect(Notice).toHaveBeenCalledWith('Failed to download Task_Completed.wav')
+      expect(Notice).toHaveBeenCalledWith('Downloaded 1 sample sound.')
     })
 
     it('handles mkdir failure when folder already exists', async () => {
@@ -546,8 +549,7 @@ describe('TickTonesSettingsTab', () => {
       expect(soundManager.playTickSound).toHaveBeenCalled()
     })
 
-    it('tick preview button warns when no sound is selected', () => {
-      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    it('tick preview button delegates to soundManager even with empty selection', () => {
       plugin.settings.tickSoundEnabled = true
       plugin.settings.tickSound = ''
 
@@ -574,9 +576,7 @@ describe('TickTonesSettingsTab', () => {
       previewItem.render!(mockSetting, {} as any)
       mockButton.click()
 
-      expect(warnSpy).toHaveBeenCalledWith('No sound selected, cannot play sound.')
-      expect(soundManager.playTickSound).not.toHaveBeenCalled()
-      warnSpy.mockRestore()
+      expect(soundManager.playTickSound).toHaveBeenCalled()
     })
 
     it('untick preview button plays untick sound when clicked', () => {

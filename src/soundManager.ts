@@ -44,7 +44,7 @@ export class SoundManager {
   }
 
   private getRandomSound(sounds: string[]): string | null {
-    if (!sounds || sounds.length === 0) {
+    if (sounds.length === 0) {
       new Notice(
         'No random sound available, please check your settings and select sound(s).',
         10 * 1000
@@ -108,9 +108,7 @@ export class SoundManager {
   }
 
   public async reloadSounds(): Promise<void> {
-    return this.soundLoader.loadSounds().then((sounds) => {
-      this.loadedSounds = sounds
-    })
+    this.loadedSounds = await this.soundLoader.loadSounds()
   }
 
   public unload(): void {

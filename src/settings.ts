@@ -335,11 +335,16 @@ export class TickTonesSettingsTab extends PluginSettingTab {
               setting.addButton((button) => {
                 button.setIcon('refresh-cw').setTooltip('Reload sounds')
                 button.onClick(async () => {
+                  button.setDisabled(true)
+                  button.setIcon('loader')
                   try {
                     await this.soundManager.reloadSounds()
                     this.update()
                   } catch (err) {
                     console.error('Failed to reload sounds.', err)
+                  } finally {
+                    button.setDisabled(false)
+                    button.setIcon('refresh-cw')
                   }
                 })
               })
@@ -404,8 +409,14 @@ export class TickTonesSettingsTab extends PluginSettingTab {
         cls: getButtonClass(sound, isSelected),
       })
 
-      button.onclick = () => {
-        onToggle(sound, button)
+      const toggle = () => onToggle(sound, button)
+
+      button.onclick = toggle
+      button.onkeydown = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          toggle()
+        }
       }
     })
   }

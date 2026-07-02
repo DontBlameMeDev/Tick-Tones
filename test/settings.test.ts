@@ -188,6 +188,7 @@ describe('TickTonesSettingsTab', () => {
     const mockButton: any = {
       setIcon: jest.fn().mockReturnThis(),
       setTooltip: jest.fn().mockReturnThis(),
+      setDisabled: jest.fn().mockReturnThis(),
       onClick: jest.fn((cb: () => Promise<void>) => {
         mockButton.click = cb
       }),

@@ -12,7 +12,7 @@ export default class TickTones extends Plugin {
   async onload() {
     await this.loadSettings()
 
-    this.soundManager = new SoundManager(this.app, this, this.manifest.dir!)
+    this.soundManager = new SoundManager(this.app, this.settings, this.manifest.dir!)
     await this.soundManager.init()
 
     this.settingsTab = new TickTonesSettingsTab(this.app, this, this.soundManager)

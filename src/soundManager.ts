@@ -1,16 +1,16 @@
-import { App, Notice } from 'obsidian'
-import { SoundLoader } from './soundLoader'
 import { Howl } from 'howler'
-import TickTones from 'main'
+import { type App, Notice } from 'obsidian'
+import { SoundLoader } from './soundLoader'
+import type { TickTonesSettings } from './types'
 
 export class SoundManager {
   private loadedSounds: Record<string, string> = {}
   private soundCache: Record<string, Howl> = {}
   private soundLoader: SoundLoader
-  private plugin: TickTones
+  private settings: TickTonesSettings
 
-  constructor(app: App, plugin: TickTones, pluginDir: string) {
-    this.plugin = plugin
+  constructor(app: App, settings: TickTonesSettings, pluginDir: string) {
+    this.settings = settings
     this.soundLoader = new SoundLoader(app, pluginDir)
   }
 
@@ -58,52 +58,47 @@ export class SoundManager {
   }
 
   public async playTickSound(): Promise<void> {
-    if (!this.plugin.settings.tickSoundEnabled) {
+    if (!this.settings.tickSoundEnabled) {
       return
     }
 
-    if (!this.plugin.settings.useRandomTickSound) {
-      this.playSound(this.plugin.settings.tickSound, this.plugin.settings.tickSoundVolume).catch(
-        (error) => {
-          console.error(error)
-        }
-      )
-      return
-    }
-
-    const randomSound = this.getRandomSound(this.plugin.settings.tickSounds)
-
-    if (!randomSound) {
-      return
-    }
-
-    this.playSound(randomSound, this.plugin.settings.tickSoundVolume).catch((error) => {
-      console.error(error)
-    })
-  }
-
-  public async playUntickSound(): Promise<void> {
-    if (!this.plugin.settings.untickSoundEnabled) {
-      return
-    }
-
-    if (!this.plugin.settings.useRandomUntickSound) {
-      this.playSound(
-        this.plugin.settings.untickSound,
-        this.plugin.settings.untickSoundVolume
-      ).catch((error) => {
+    if (!this.settings.useRandomTickSound) {
+      this.playSound(this.settings.tickSound, this.settings.tickSoundVolume).catch((error) => {
         console.error(error)
       })
       return
     }
 
-    const randomSound = this.getRandomSound(this.plugin.settings.untickSounds)
+    const randomSound = this.getRandomSound(this.settings.tickSounds)
 
     if (!randomSound) {
       return
     }
 
-    this.playSound(randomSound, this.plugin.settings.untickSoundVolume).catch((error) => {
+    this.playSound(randomSound, this.settings.tickSoundVolume).catch((error) => {
+      console.error(error)
+    })
+  }
+
+  public async playUntickSound(): Promise<void> {
+    if (!this.settings.untickSoundEnabled) {
+      return
+    }
+
+    if (!this.settings.useRandomUntickSound) {
+      this.playSound(this.settings.untickSound, this.settings.untickSoundVolume).catch((error) => {
+        console.error(error)
+      })
+      return
+    }
+
+    const randomSound = this.getRandomSound(this.settings.untickSounds)
+
+    if (!randomSound) {
+      return
+    }
+
+    this.playSound(randomSound, this.settings.untickSoundVolume).catch((error) => {
       console.error(error)
     })
   }

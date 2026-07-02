@@ -26,11 +26,24 @@
         "noConsole": "off"
       },
       "style": {
+        "noNonNullAssertion": "off",
         "useConst": "error",
         "useTemplate": "warn"
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["test/**/*.ts", "__mocks__/**/*.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ],
   "javascript": {
     "formatter": {
       "quoteStyle": "single",

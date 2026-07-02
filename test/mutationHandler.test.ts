@@ -113,4 +113,20 @@ describe('handleCheckboxMutation', () => {
     expect(onCheck).not.toHaveBeenCalled()
     expect(onUncheck).not.toHaveBeenCalled()
   })
+
+  it('handles data-task attribute mutation on parent with oldValue "" → "x"', () => {
+    const checkbox = checkboxEl(true)
+    const parent = parentEl(checkbox)
+    handleCheckboxMutation([mutation(parent, '')], onCheck, onUncheck)
+    expect(onCheck).toHaveBeenCalledTimes(1)
+    expect(onUncheck).not.toHaveBeenCalled()
+  })
+
+  it('handles data-task attribute mutation on parent with oldValue "x" → ""', () => {
+    const checkbox = checkboxEl(false)
+    const parent = parentEl(checkbox)
+    handleCheckboxMutation([mutation(parent, 'x')], onCheck, onUncheck)
+    expect(onCheck).not.toHaveBeenCalled()
+    expect(onUncheck).toHaveBeenCalledTimes(1)
+  })
 })

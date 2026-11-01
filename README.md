@@ -9,28 +9,6 @@ Bring your checklists to life. Tick Tones plays a sound whenever you check or
 uncheck a checkbox in [Obsidian](https://obsidian.md/). It supports custom
 sounds, volume control, and a variety of audio formats.
 
-## Table of Contents
-
-<!--toc:start-->
-
-- [Checkbox Tick Tones for Obsidian](#checkbox-tick-tones-for-obsidian)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Installation](#installation)
-    - [From Obsidian](#from-obsidian)
-    - [From GitHub](#from-github)
-    - [Quick Start](#quick-start)
-  - [Adding Sounds](#adding-sounds)
-    - [Built-in Sample Sounds](#built-in-sample-sounds)
-    - [Your Own Sounds](#your-own-sounds)
-    - [Why Manual Installation?](#why-manual-installation)
-  - [Configuration](#configuration)
-  - [Troubleshooting](#troubleshooting)
-    - [Sounds Do Not Play](#sounds-do-not-play)
-    - [Where Is My Vault Folder?](#where-is-my-vault-folder)
-
-<!--toc:end-->
-
 ## Features
 
 - Plays a sound when you check or uncheck a checkbox
@@ -71,7 +49,7 @@ sounds, volume control, and a variety of audio formats.
 3. Adjust the tick and untick sounds and volumes to your liking.
 4. Check or uncheck a checkbox in any note to hear the result.
 
-> \[\!TIP\] The settings tab has a **Reload Sounds** button. Use it after adding
+> The settings tab has a **Reload Sounds** button. Use it after adding
 > new sound files instead of disabling and re-enabling the plugin.
 
 ## Adding Sounds
@@ -91,7 +69,7 @@ download a curated set of sounds directly into your assets folder.
    `.obsidian` folder is hidden by default — enable hidden file viewing in your
    file browser.
 
-   > \[\!NOTE\] `YourVault` is your Obsidian vault root folder, not the Obsidian
+   > `YourVault` is your Obsidian vault root folder, not the Obsidian
    > application folder.
 
 2. Find sounds on sites like

@@ -9,7 +9,7 @@ Thank you for considering contributing to Tick-Tones! We welcome all contributio
 
 2. **Clone your fork**  
    ```
-   git clone https://github.com/your-username/Tick-Tones.git
+   git clone https://github.com/DontBlameMeDev/Tick-Tones.git
    cd Tick-Tones
    ```
 

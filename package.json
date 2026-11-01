@@ -11,9 +11,20 @@
     "lint-fix": "bun x biome check --write .",
     "test": "bun test"
   },
-  "keywords": [],
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin"
+  ],
   "author": "DontBlameMe",
   "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DontBlameMeDev/Tick-Tones.git"
+  },
+  "homepage": "https://github.com/DontBlameMeDev/Tick-Tones#readme",
+  "bugs": {
+    "url": "https://github.com/DontBlameMeDev/Tick-Tones/issues"
+  },
   "packageManager": "bun@1.3.12",
   "devDependencies": {
     "@types/bun": "^1.3.14",

@@ -365,10 +365,10 @@ describe('TickTonesSettingsTab', () => {
 
       expect(requestUrl).toHaveBeenCalledTimes(2)
       expect(requestUrl).toHaveBeenCalledWith(
-        'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Microsoft_ToDo.wav'
+        'https://raw.githubusercontent.com/DontBlameMeDev/Tick-Tones/master/assets/Microsoft_ToDo.wav'
       )
       expect(requestUrl).toHaveBeenCalledWith(
-        'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Task_Completed.wav'
+        'https://raw.githubusercontent.com/DontBlameMeDev/Tick-Tones/master/assets/Task_Completed.wav'
       )
       expect(mockAdapter.mkdir).toHaveBeenCalledWith('.obsidian/plugins/tick-tones/assets')
       expect(mockAdapter.writeBinary).toHaveBeenCalledTimes(2)

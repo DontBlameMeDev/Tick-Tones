@@ -1,9 +1,9 @@
 # Checkbox Tick Tones for Obsidian
 
-[![Stars](https://img.shields.io/github/stars/DontBlameMe99/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%23f9e2af)](https://github.com/DontBlameMe99/Tick-Tones/stargazers)
-[![Forks](https://img.shields.io/github/forks/DontBlameMe99/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%2394e2d5)](https://github.com/DontBlameMe99/Tick-Tones/network/members)
-[![Latest Version](https://img.shields.io/github/v/release/DontBlameMe99/Tick-Tones?include_prereleases&display_name=tag&style=for-the-badge&label=Version&labelColor=%231e1e2e&color=%23cba6f7)](https://github.com/DontBlameMe99/Tick-Tones/releases)
-[![License](https://img.shields.io/github/license/DontBlameMe99/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%23f38ba8)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/DontBlameMeDev/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%23f9e2af)](https://github.com/DontBlameMeDev/Tick-Tones/stargazers)
+[![Forks](https://img.shields.io/github/forks/DontBlameMeDev/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%2394e2d5)](https://github.com/DontBlameMeDev/Tick-Tones/network/members)
+[![Latest Version](https://img.shields.io/github/v/release/DontBlameMeDev/Tick-Tones?include_prereleases&display_name=tag&style=for-the-badge&label=Version&labelColor=%231e1e2e&color=%23cba6f7)](https://github.com/DontBlameMeDev/Tick-Tones/releases)
+[![License](https://img.shields.io/github/license/DontBlameMeDev/Tick-Tones?style=for-the-badge&labelColor=%231e1e2e&color=%23f38ba8)](LICENSE)
 
 Bring your checklists to life. Tick Tones plays a sound whenever you check or
 uncheck a checkbox in [Obsidian](https://obsidian.md/). It supports custom
@@ -56,7 +56,7 @@ sounds, volume control, and a variety of audio formats.
 ### From GitHub
 
 1. Download the
-   [latest release](https://github.com/DontBlameMe99/Tick-Tones/releases/latest).
+   [latest release](https://github.com/DontBlameMeDev/Tick-Tones/releases/latest).
 2. Extract the zip file.
 3. Move the extracted folder to your vault's plugin directory at
    `.obsidian/plugins/`.

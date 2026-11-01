@@ -15,11 +15,11 @@ import type { TickTonesSettings } from './types'
 const SAMPLE_SOUNDS: Array<{ name: string; url: string }> = [
   {
     name: 'Microsoft_ToDo.wav',
-    url: 'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Microsoft_ToDo.wav',
+    url: 'https://raw.githubusercontent.com/DontBlameMeDev/Tick-Tones/master/assets/Microsoft_ToDo.wav',
   },
   {
     name: 'Task_Completed.wav',
-    url: 'https://raw.githubusercontent.com/DontBlameMe99/Tick-Tones/master/assets/Task_Completed.wav',
+    url: 'https://raw.githubusercontent.com/DontBlameMeDev/Tick-Tones/master/assets/Task_Completed.wav',
   },
 ]
 
@@ -125,7 +125,7 @@ export class TickTonesSettingsTab extends PluginSettingTab {
               setting.setDesc('Head over to GitHub for guides and examples.')
               setting.addButton((button) => {
                 button.setIcon('external-link').setTooltip('Open GitHub')
-                button.onClick(() => window.open('https://github.com/DontBlameMe99/Tick-Tones'))
+                button.onClick(() => window.open('https://github.com/DontBlameMeDev/Tick-Tones'))
               })
             },
           },
